@@ -1,4 +1,4 @@
-use eyrc14_auto_data_analysis;
+use eyrc16_selection_test;
 
 -- Drop original tables if they exist
 drop table if exists WeightedFeature1;
@@ -64,14 +64,14 @@ order by question_id;
 
 
 -- Remove Redundant Tables
-drop table w_values;
+/* drop table w_values;
 drop table WeightedFeature1;
-drop table WeightedFeature2;
+drop table WeightedFeature2; */
 
 
 -- Now Export the data to CSV file
 select *
-from NewFeatures natural join (select id as question_id, difficulty_level from question_master) as T
+from WeightedFeatures natural join (select id as question_id, difficulty_level from question_master) as T
 into outfile '/tmp/weightedfeatures.csv'
 fields terminated by ','
 enclosed by ''
